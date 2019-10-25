@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${started}"></h1>
+    <table class="table table-dark">
+        <tr>
+            <th:block th:each="field: ${row1}" >
+                <td th:switch="${field.status}">
+                    <span th:case="${status_x}">X</span><span th:case="${status_o}">O</span>
+                </td>
+            </th:block>
+        </tr>
+        <tr>
+            <th:block th:each="field: ${row2}" >
+                <td th:switch="${field.status}">
+                    <span th:case="${status_x}">X</span><span th:case="${status_o}">O</span>
+                </td>
+            </th:block>
+        </tr>
+        <tr>
+            <th:block th:each="field: ${row3}" >
+                <td th:switch="${field.status}">
+                    <span th:case="${status_x}">X</span><span th:case="${status_o}">O</span>
+                </td>
+            </th:block>
+        </tr>
+    </table>
+</body>
+</html>
