@@ -15,7 +15,6 @@ public class TictactoeService {
 
     private final FieldRepository fieldRepository;
     private Status nextStatus = Status.X;
-    private int turn = 1;
 
     public List<Field> findAllByRow(int row) {
         return fieldRepository.findAllByRow(row);
@@ -54,28 +53,28 @@ public class TictactoeService {
     public boolean checkWin() {
         for (int i = 1; i < 4; i++) {
             List<Field> row = findAllByRow(i);
-            if(checkListToWin(row)) {
+            if (checkListToWin(row)) {
                 return true;
             }
         }
         List<Field> column = fieldRepository.findAllInFirstColumn();
-        if(checkListToWin(column)) {
+        if (checkListToWin(column)) {
             return true;
         }
         column = fieldRepository.findAllInSecondColumn();
-        if(checkListToWin(column)) {
+        if (checkListToWin(column)) {
             return true;
         }
         column = fieldRepository.findAllInThirdColumn();
-        if(checkListToWin(column)) {
+        if (checkListToWin(column)) {
             return true;
         }
         column = fieldRepository.findAllInFirstCross();
-        if(checkListToWin(column)) {
+        if (checkListToWin(column)) {
             return true;
         }
         column = fieldRepository.findAllInSecondCross();
-        if(checkListToWin(column)) {
+        if (checkListToWin(column)) {
             return true;
         }
 
@@ -86,5 +85,13 @@ public class TictactoeService {
         return list.get(0).getStatus() == list.get(1).getStatus() &&
                 list.get(0).getStatus() == list.get(2).getStatus() &&
                 (list.get(0).getStatus() == Status.X || list.get(0).getStatus() == Status.O);
+    }
+
+    public void resetBoard() {
+        List<Field> fields = fieldRepository.findAll();
+        for (Field field : fields) {
+            field.setStatus(Status.N);
+            fieldRepository.save(field);
+        }
     }
 }

@@ -38,6 +38,13 @@ public class TictactoeController {
         return "redirect:/";
     }
 
+    @GetMapping("/new-game")
+    public String startNewGame(HttpSession session) {
+        tictactoeService.resetBoard();
+        session.removeAttribute("win");
+        return "redirect:/";
+    }
+
     private void addAttributesToModel(Model model) {
         model.addAttribute("status_x", Status.X);
         model.addAttribute("status_o", Status.O);
