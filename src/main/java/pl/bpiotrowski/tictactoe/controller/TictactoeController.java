@@ -3,10 +3,7 @@ package pl.bpiotrowski.tictactoe.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.bpiotrowski.tictactoe.entity.Field;
 import pl.bpiotrowski.tictactoe.entity.Status;
 import pl.bpiotrowski.tictactoe.service.TictactoeService;
@@ -15,12 +12,11 @@ import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/")
 public class TictactoeController {
 
     private final TictactoeService tictactoeService;
 
-    @GetMapping
+    @GetMapping("/")
     public String start(HttpSession session, Model model) {
         if(session.getAttribute("started") == null) {
             session.setAttribute("started", "true");
@@ -30,9 +26,9 @@ public class TictactoeController {
         return "tictactoe";
     }
 
-    @PostMapping
-    public String create(@RequestBody Field field) {
-        tictactoeService.create(field);
+    @GetMapping("/change/{id}")
+    public String changeStatus(@PathVariable Long id) {
+        tictactoeService.changeStatus(id);
         return "redirect:/";
     }
 

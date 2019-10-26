@@ -3,6 +3,7 @@ package pl.bpiotrowski.tictactoe.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -13,11 +14,11 @@ public class Field {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
+    @NotNull
     @Enumerated(EnumType.STRING)
     Status status;
 
-    @Column(nullable = false)
+    @NotNull
     int row;
 
 }
